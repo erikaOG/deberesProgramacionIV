@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<title>Demo Eventos en Javascript</title>		
+	<div align="center"><h1>Eventos en javascript</h1></div>
+	<link rel="stylesheet" type="text/css" href="css/style-1.css">
+</head>
+<body>
+	<div>
+		<h3>Uso del evento "oninput"</h3>
+		<p>Ejecuta un script cuando el usuario ha ingresado algo en la caja de texto</p>
+		<p>Escribe algo en el campo de texto para activar una función.</p>
+		<input type="text" id="myInput" oninput="myFunctionInput()">
+		<p id="demo3"></p>
+	</div>
+	<div><br>
+		<h3>Uso del evento "onpaste"</h3>
+		<p>Este evento sirve para pegar un texto después de ser cortado</p>
+		<input type="text" onpaste="myFunctionOnPaste()" value="Trate de pegar este texto aquí" size="40">
+		<p id="demo"></p>
+	</div>
+	<div><br>
+		<h3>Uso del evento "ondrop"</h3>
+		<p>Ejecuta un evento Javascript cuando un elemento arrastable se deje caer en el elemento div </p>
+		<p>Arrastre el elemento p hacia adelante y hacia atrás entre los dos rectángulos:</p>
+			<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+ 				<p ondragstart="dragStart(event)" ondrag="dragging(event)" draggable="true" id="dragtarget">Arrastrame!</p>
+			</div>
+			<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+				<p id="demo2"></p>
+	</div><br>
+	
+
+
+</body>
+<script src ="js/evento2.js" type="text/javascript"></script>
+	<script>
+		function myFunctionOnPaste() {
+    		document.getElementById("demo").innerHTML = "Usted pegó el texto!";
+		}
+	</script>
+
+	<script>
+		function myFunctionInput() {
+    		var x = document.getElementById("myInput").value;
+    		document.getElementById("demo3").innerHTML = "Tu escribiste " + x;
+		}
+	</script>
+	<script>
+		function dragStart(event) {	
+    			event.dataTransfer.setData("Text", event.target.id);
+		}
+
+		function dragging(event) {
+    		document.getElementById("demo2").innerHTML = "El elemento p se está arrastrando";
+		}
+
+		function allowDrop(event) {
+    		event.preventDefault();
+		}
+
+		function drop(event) {
+    		event.preventDefault();
+    		var data = event.dataTransfer.getData("Text");
+    		event.target.appendChild(document.getElementById(data));
+    		document.getElementById("demo2").innerHTML;
+		}
+</script>
+
+</html>
